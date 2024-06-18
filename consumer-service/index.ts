@@ -21,7 +21,7 @@ async function main() {
     host: '0.0.0.0',
   });
 
-  console.log('Notification service ready at http://localhost:4000');
+  console.log('Consumer service ready at http://localhost:4000');
 
   const signals = ['SIGINT', 'SIGTERM', 'SIGQUIT'] as const;
 
