@@ -1,4 +1,4 @@
-import {KafkaProducerFactory} from './kafka';
+import KafkaProducerFactory from './kafka';
 import {createServer} from './server';
 
 async function gracefulShutdown(
@@ -19,7 +19,10 @@ async function main() {
 
   const kafkaProducer = new KafkaProducerFactory();
   kafkaProducer.start();
-  kafkaProducer.sendMessage('message-created', 'new message');
+  // kafkaProducer.sendMessage(
+  //   'pancakeswap-liquidity-pair-created',
+  //   'new message'
+  // );
 
   await app.listen({
     port: 4000,
@@ -35,9 +38,8 @@ async function main() {
     process.on(signal, () => {
       gracefulShutdown(app, kafkaProducer);
     });
+    console.log('Producer service shutting down');
   }
-
-  console.log('Producer service shutting down');
 }
 
 main();

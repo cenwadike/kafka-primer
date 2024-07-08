@@ -1,6 +1,9 @@
 import {Kafka, Producer, RecordMetadata} from 'kafkajs';
 
-const topics = ['message-created'] as const;
+const topics = [
+  'message-created',
+  'pancakeswap-liquidity-pair-created',
+] as const;
 
 export default class KafkaProducerFactory {
   private producer: Producer;
@@ -40,7 +43,14 @@ export default class KafkaProducerFactory {
   private createProducer(): Producer {
     const kafka = new Kafka({
       clientId: 'producer-client',
-      brokers: ['localhost:9092'],
+      brokers: ['pkc-75m1o.europe-west3.gcp.confluent.cloud:9092'],
+      sasl: {
+        mechanism: 'plain',
+        username: '3ZKUJGICBJ4YSR4Z',
+        password:
+          'f/NaLTF1KHXCHmxI4h2O/JFlcM3y3/Pl+RKiNX/o7/gEIzsJafLkMOsRQBJCL4T2',
+      },
+      ssl: true,
     });
 
     return kafka.producer();
